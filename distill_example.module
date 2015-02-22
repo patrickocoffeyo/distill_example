@@ -24,6 +24,7 @@ function distill_example_menu() {
  * Callback page for distill menu item.
  */
 function distill_example_page() {
+  // Update this function so that it loads an entity that you would like to test against.
   $entity = node_load(1);
   // Create instance of processor.
   $processor = new DistillTestEntityProcessor();
@@ -53,8 +54,10 @@ function distill_example_page() {
       'body'
     )
   ));
+
   // Output JSON
   return drupal_json_output($distiller->getFieldValues());
+  drupal_exit();
 }
 
 /**
@@ -62,11 +65,21 @@ function distill_example_page() {
  */
 function distill_example_page_bad() {
   $entity = node_load(1);
-  die(var_dump($entity));
+  return drupal_json_output($entity);
+  drupal_exit();
 }
 
 /**
- * Defines an entity schema for X
+ * Defines set of formatting rules.
+ * @see DistillTestEntityProcessor
  */
 class DistillTestEntityProcessor extends DistillProcessor {
+  public function processTextWithSummaryType($wrapper, $index, array $settings) {
+    $field_value = $wrapper->value();
+    return $field_value['value'];
+  }
+
+  public function processBodyField($wrapper, $index, array $settings) {
+    return 'hi i am a body field';
+  }
 }
