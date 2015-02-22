@@ -1,0 +1,6 @@
+name = Distill Example
+description = Module that defines an example implementation of the Distill module.
+package = Entity
+version = 7.x-0.1
+core = 7.x
+dependencies[] = distill

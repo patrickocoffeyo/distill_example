@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * Impliments hook_menu()
+ */
+function distill_example_menu() {
+  $items['distill'] = array(
+    'title' => t('Distilled Data'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'distill_example_page',
+    'access callback' => TRUE
+  );
+  $items['distill/bad'] = array(
+    'title' => t('Distilled Data'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'distill_example_page_bad',
+    'access callback' => TRUE
+  );
+
+  return $items;
+}
+
+/**
+ * Callback page for distill menu item.
+ */
+function distill_example_page() {
+  $entity = node_load(1);
+  // Create instance of processor.
+  $processor = new DistillTestEntityProcessor();
+  // Create instance of Distill.
+  $distiller = new Distill('node', $entity, $processor);
+
+  // Specify which fields should be returned.
+  $distiller->setField('nid', '_id');
+  $distiller->setField('title');
+  $distiller->setField('body', 'post');
+  $distiller->setField('field_image', 'image');
+  $distiller->setField('field_integer', 'number');
+  $distiller->setField('field_float', 'float');
+  $distiller->setField('field_decimal', 'decimal');
+  $distiller->setField('field_list_of_floats', 'floats');
+  $distiller->setField('field_list_of_integers', 'integers');
+  $distiller->setField('field_list_of_text', 'texts');
+  $distiller->setField('field_user_reference', 'user', array(
+    'include_fields' => array(
+      'name',
+      'mail'
+    )
+  ));
+  $distiller->setField('field_entity_reference', 'topic', array(
+    'include_fields' => array(
+      'title',
+      'body'
+    )
+  ));
+  // Output JSON
+  return drupal_json_output($distiller->getFieldValues());
+}
+
+/**
+ * Callback page for distill menu item.
+ */
+function distill_example_page_bad() {
+  $entity = node_load(1);
+  die(var_dump($entity));
+}
+
+/**
+ * Defines an entity schema for X
+ */
+class DistillTestEntityProcessor extends DistillProcessor {
+}
