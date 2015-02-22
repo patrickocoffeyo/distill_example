@@ -26,8 +26,10 @@ function distill_example_menu() {
 function distill_example_page() {
   // Update this function so that it loads an entity that you would like to test against.
   $entity = node_load(1);
+
   // Create instance of processor.
   $processor = new DistillTestEntityProcessor();
+
   // Create instance of Distill.
   $distiller = new Distill('node', $entity, $processor);
 
@@ -42,12 +44,18 @@ function distill_example_page() {
   $distiller->setField('field_list_of_floats', 'floats');
   $distiller->setField('field_list_of_integers', 'integers');
   $distiller->setField('field_list_of_text', 'texts');
+
+  // This is an entity reference field. We pass a settings array
+  // that has an 'include_fields' key. This key contains an array of fields
+  // from the referenced entity that should be returned.
   $distiller->setField('field_user_reference', 'user', array(
     'include_fields' => array(
       'name',
       'mail'
     )
   ));
+
+  // See above comment about entity reference fields.
   $distiller->setField('field_entity_reference', 'topic', array(
     'include_fields' => array(
       'title',
@@ -55,13 +63,13 @@ function distill_example_page() {
     )
   ));
 
-  // Output JSON
+  // Output the returned array as JSON.
   return drupal_json_output($distiller->getFieldValues());
   drupal_exit();
 }
 
 /**
- * Callback page for distill menu item.
+ * Callback page for distill/bad menu item.
  */
 function distill_example_page_bad() {
   $entity = node_load(1);
