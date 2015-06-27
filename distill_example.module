@@ -29,6 +29,7 @@ function distill_example_page() {
 
   // Create instance of processor.
   $processor = new DistillTestEntityProcessor();
+  $processor = new DistillProcessor();
 
   // Create instance of Distill.
   $distiller = new Distill('node', $entity, $processor);
@@ -38,17 +39,11 @@ function distill_example_page() {
   $distiller->setField('title');
   $distiller->setField('body', 'post');
   $distiller->setField('field_image', 'image');
-  $distiller->setField('field_integer', 'number');
-  $distiller->setField('field_float', 'float');
-  $distiller->setField('field_decimal', 'decimal');
-  $distiller->setField('field_list_of_floats', 'floats');
-  $distiller->setField('field_list_of_integers', 'integers');
-  $distiller->setField('field_list_of_text', 'texts');
 
   // This is an entity reference field. We pass a settings array
   // that has an 'include_fields' key. This key contains an array of fields
   // from the referenced entity that should be returned.
-  $distiller->setField('field_user_reference', 'user', array(
+  $distiller->setField('field_author', 'user', array(
     'include_fields' => array(
       'name',
       'mail'
@@ -56,10 +51,10 @@ function distill_example_page() {
   ));
 
   // See above comment about entity reference fields.
-  $distiller->setField('field_entity_reference', 'topic', array(
+  $distiller->setField('field_tags', 'topic', array(
     'include_fields' => array(
-      'title',
-      'body'
+      'name',
+      'tid'
     )
   ));
 
