@@ -4,16 +4,16 @@
  * Impliments hook_menu()
  */
 function distill_example_menu() {
-  $items['distill'] = array(
-    'title' => t('Distilled Data'),
-    'type' => MENU_CALLBACK,
-    'page callback' => 'distill_example_page',
-    'access callback' => TRUE
-  );
   $items['distill/bad'] = array(
     'title' => t('Distilled Data'),
     'type' => MENU_CALLBACK,
     'page callback' => 'distill_example_page_bad',
+    'access callback' => TRUE
+  );
+  $items['distill'] = array(
+    'title' => t('Distilled Data'),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'distill_example_page',
     'access callback' => TRUE
   );
 
@@ -28,7 +28,7 @@ function distill_example_page() {
   $entity = node_load(1);
 
   // Create instance of processor.
-  $processor = new DistillTestEntityProcessor();
+  //$processor = new DistillTestEntityProcessor();
   $processor = new DistillProcessor();
 
   // Create instance of Distill.
