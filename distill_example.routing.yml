@@ -1,0 +1,17 @@
+distill_example.bad:
+  path: '/distill/bad'
+  defaults:
+    _controller: '\Drupal\distill_example\Controller\DistillExampleController::badExample'
+    _title: 'Bad Data'
+  requirements:
+    _permission: 'access content'
+    _content_type_format: 'json'
+
+distill_example.good:
+  path: '/distill/good'
+  defaults:
+    _controller: '\Drupal\distill_example\Controller\DistillExampleController::goodExample'
+    _title: 'Good Data'
+  requirements:
+    _permission: 'access content'
+    _content_type_format: 'json'
