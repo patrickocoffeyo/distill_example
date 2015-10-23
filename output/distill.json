@@ -1,24 +1,24 @@
 {
-  "_id": "1",
-  "title": "The Pizza Monster Strikes Again",
-  "post": "hi i am a body field",
-  "image": "http://distill.local/sites/default/files/field/image/pizza_monster.jpg",
-  "user": {
-    "name": "admin",
-    "mail": "patrickcoffey48@gmail.com"
-  },
-  "topic": [
-    {
-      "name": "Pizza",
-      "tid": "1"
-    },
-    {
-      "name": "Monster",
-      "tid": "2"
-    },
-    {
-      "name": "Zomg",
-      "tid": "3"
-    }
-  ]
+  "_id": "1",
+  "title": "The Pizza Monster Strikes Again",
+  "post": "hi i am a body field",
+  "image": "http://distill.local/sites/default/files/field/image/pizza_monster.jpg",
+  "user": {
+    "name": "admin",
+    "mail": "patrickcoffey48@gmail.com"
+  },
+  "topic": [
+    {
+      "name": "Pizza",
+      "tid": "1"
+    },
+    {
+      "name": "Monster",
+      "tid": "2"
+    },
+    {
+      "name": "Zomg",
+      "tid": "3"
+    }
+  ]
 }
